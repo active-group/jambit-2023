@@ -7,6 +7,7 @@
 
 (define-record dillo
   make-dillo
+  dillo?
   (dillo-alive? boolean)
   (dillo-weight natural))
 
@@ -35,6 +36,7 @@
 ; - Einen Satz, den er sagt
 (define-record parrot
   make-parrot
+  parrot?
   (parrot-weight natural)
   (parrot-sentence string))
 
@@ -57,3 +59,88 @@
 (define run-over-parrot
   (lambda (parrot)
     (make-parrot (parrot-weight parrot) "")))
+
+
+;;; GEMISCHTE DATEN
+; Ein Tier ist eins der folgenden:
+; - Dillo
+; - Papagei
+; "ist eins der folgenden" -> gemischten Daten
+
+#|
+class Dillo implements IRunOverAble {
+  bool alive;
+  integer weight;
+
+  void runOver(){
+    this.alive = false;
+  }
+}
+
+interface IRunOverAble {
+  void runOver();
+}
+
+|#
+
+(define animal
+  (signature (mixed parrot dillo)))
+
+; Überfahre ein Tier
+(: run-over-animal (animal -> animal))
+(check-expect (run-over-animal parrot1) (make-parrot 500 ""))
+(check-expect (run-over-animal dillo1) (run-over-dillo dillo1))
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      ((parrot? animal) (run-over-parrot animal))
+      ((dillo? animal) (run-over-dillo animal)))))
+
+;; Füttere ein Tier, Futter in g
+; rein: Tier, Futter in Gramm
+; raus: Tier
+(: feed-animal (animal natural -> animal))
+(check-expect (feed-animal dillo1 1000) (make-dillo #t 21000))
+(check-expect (feed-animal dillo2 1000) dillo2)
+(check-expect (feed-animal parrot1 50) (make-parrot 550 (parrot-sentence parrot1)))
+(define feed-animal
+  (lambda (animal food)
+    (cond
+      ((dillo? animal)
+       (if (dillo-alive? animal)
+           (make-dillo #t (+ (dillo-weight animal) food))
+           animal))
+       ((parrot? animal)
+        (if (parrot-alive? animal)
+            (make-parrot (+ food (parrot-weight animal))
+                         (parrot-sentence animal))
+            animal)))))
+
+;;; ÜBUNG: Implementiere Brüche
+; Multiplikation zweier Brüche
+(define-record bruch
+  really-make-bruch
+  bruch?
+  (bruch-zähler integer)
+  (bruch-nenner natural))
+
+(define make-bruch
+  (lambda (z n)
+    (if (= n 0)
+        (violation "Nenner ist 0")
+        (really-make-bruch z n))))
+
+; Multipliziere zwei Brüche
+; rein: Bruch 1 und Bruch 2
+; raus: Bruch
+(: mult (bruch bruch -> bruch))
+(check-expect (mult (make-bruch 3 4) (make-bruch 2 3)) (make-bruch 6 12))
+(define mult
+  (lambda (bruch1 bruch2)
+    (define zähler1 (bruch-zähler bruch1))
+    (define nenner1 (bruch-nenner bruch1))
+    (define zähler2 (bruch-zähler bruch2))
+    (define nenner2 (bruch-nenner bruch2))
+    (make-bruch (* zähler1 zähler2)
+                (* nenner1 nenner2))))
+
