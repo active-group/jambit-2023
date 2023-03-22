@@ -50,3 +50,10 @@
   (lambda (p)
     (not (string=? (parrot-sentence p) ""))))
 
+; Überfahre einen Papagei
+(: run-over-parrot (parrot -> parrot))
+(check-expect (run-over-parrot parrot1) (make-parrot 500 ""))
+(check-expect (run-over-parrot parrot3) parrot3)
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot (parrot-weight parrot) "")))
