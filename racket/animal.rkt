@@ -152,6 +152,74 @@ interface IRunOverAble {
 ; Liste von Tieren
 (define alist (list dillo1 parrot1 dillo2 parrot2))
 
+;;; Alle Tiere einer Liste überfahren
+; Rein: Liste von Tieren
+; Raus: Liste von Tieren
+(: run-over-animals ((list-of animal) -> (list-of animal)))
+(check-expect (run-over-animals dlist) (list (make-dillo #f 20000) dillo2))
+(check-expect (run-over-animals plist) (list (run-over-animal parrot1)
+                                             (run-over-animal parrot2)))
+(define run-over-animals
+  (lambda (lis)
+    (cond
+      ((empty? lis) empty)
+      ((cons? lis) (cons (run-over-animal (first lis))
+                         (run-over-animals (rest lis)))))))
+
+
+
+; ÜBUNG: An jeden String einer String-Liste "!" anfügen
+; Hilfsfunktion (string-append "Hallo " "du") -> "Hallo du"
+
+; ÜBUNG: Jedes Element einer Integer-Liste um 1 erhöhen
+(: inc-list ((list-of integer) -> (list-of integer)))
+(check-expect (inc-list (list 1 2 3 4 5)) (list 2 3 4 5 6))
+(define inc-list
+  (lambda (lis)
+    (cond
+      ((empty? lis) empty)
+      ((cons? lis) (cons (inc (first lis))
+                         (inc-list (rest lis)))))))
+
+(define inc
+  (lambda (x)
+    (+ x 1)))
+
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+(define list-map
+  (lambda (f lis)
+    (cond
+      ((empty? lis) empty)
+      ((cons? lis) (cons (f (first lis))
+                         (list-map f (rest lis)))))))
+
+;; Jedes Element um 1 erniedrigen
+(check-expect (dec-list (list 1 2 3)) (list 0 1 2))
+(define dec-list
+  (lambda (lis)
+    (list-map dec lis)))
+
+(define dec
+  (lambda (x) (- x 1)))
+
+
+;; Alle Elemente einer Liste aufsummieren
+(: list-sum ((list-of integer) -> integer))
+(check-expect (list-sum lis4) 18)
+(check-expect (list-sum lis2) 22)
+(check-expect (list-sum (empty)) 0)
+(define list-sum
+  (lambda (lis)
+    (cond
+      ((empty? lis) 0)                           ; neutrale Element der Addition
+      ((cons? lis) (+ (first lis)
+                      (list-sum (rest lis)))))))
+
+
+
+
+
+
 
 
 
