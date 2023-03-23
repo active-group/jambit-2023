@@ -334,9 +334,45 @@ interface IRunOverAble {
               (first lis2))
         (interleave (rest lis1) (rest lis2)))))))
 
+(define interleave
+  (lambda (lis1 lis2)
+    (cond
+      ((empty? lis1) lis2)
+      ((cons? lis1)
+       (cons (first lis1)
+             (interleave lis2 (rest lis1)))))))
 
+;;; Länge einer Liste bestimmen!
+(: list-length ((list-of %a) -> natural))
+(check-expect (list-length (list 1 2 3 4)) 4)
+(check-expect (list-length empty) 0)
+#;(define list-length
+  (lambda (lis)
+    (cond
+      ((empty? lis) 0)
+      ((cons? lis)
+       (+ 1 (list-length (rest lis)))))))
 
+(define list-length
+  (lambda (lis)
+    (list-fold 0
+               (lambda (a b) (+ b 1))
+               lis)))
 
+;; map mit Akkumulator
+(define map-2
+  (lambda (f lis res)
+    (cond
+      ((empty? lis) res)
+      ((cons? lis)
+       (map-2 f (rest lis) (concat res
+                                 (list (f (first lis)))))))))
+
+(define map-22
+  (lambda (f lis)
+    (map-2 f lis empty)))
+
+;; list-sum mit Akkumulator implementieren
 
 
 
