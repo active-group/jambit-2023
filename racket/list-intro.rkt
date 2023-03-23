@@ -25,6 +25,7 @@
   (first a)
   (rest (list-of a)))
 
+(: lis1 (list-of integer))
 (define lis1 (cons 3 (empty)))
 (define lis2 (cons 15 (cons 7 (empty))))
 (define lis3 (cons 2 lis2))
@@ -139,3 +140,26 @@
 
 #;(define fahrzeug
   (signature (mixed auto fahrrad)))
+
+
+(define long-string?
+  (lambda (str)
+    (> (string-length str) 3)))
+
+;;; Schreibe Funktion, die aus Liste von Strings alle entfernt, die kürzer als 4 Buchstaben sind
+; Hilfsfunktion: string-length
+
+(: remove-short-words ((list-of string) -> (list-of string)))
+(check-expect (remove-short-words (cons "Hallo" (cons "du" (empty)))) (cons "Hallo" (empty)))
+(define remove-short-words
+  (lambda (words)
+    (list-filter long-string? words)))
+
+
+
+
+
+
+
+
+  
