@@ -426,5 +426,52 @@ interface IRunOverAble {
       ((= n 0) 1)
       ((> n 0) (* n (factorial (dec n)))))))
 
+;; Fibonacci-Zahlen
+;; Fib(n) = Fib(n-1) + F(n-2)
+;; Fib(1), Fib(0)
+
+(: fib (natural -> natural))
+(check-expect (fib 0) 1)
+(check-expect (fib 1) 1)
+(check-expect (fib 2) 2)
+(check-expect (fib 3) 3)
+(check-expect (fib 4) 5)
+(check-expect (fib 5) 8)
+(define fib
+  (lambda (n)
+    (cond
+      ((= n 0) 1)
+      ((= n 1) 1)
+      ((> n 1) (+ (fib (- n 1)) (fib (- n 2)))))))
+
+
+;; n-tes Element einer Liste herausholen
+(: nth (natural (list-of %a) -> %a))
+(check-expect (nth 2 (list 9 8 7 6)) 7)
+(check-expect (nth 1 (list "h" "a" "l" "l" "o")) "a")
+(check-error (nth 5 (list 1 2)) "Index out of bounds")
+(define nth
+  (lambda (n lis)
+    (cond
+      ((empty? lis) (violation "Index out of bounds"))
+      ((= n 0) (first lis))
+      ((> n 0) (nth (- n 1) (rest lis))))))
+
+
+;; PROPERTY-BASED TESTING
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
