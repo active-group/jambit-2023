@@ -227,17 +227,39 @@ interface IRunOverAble {
       ((cons? lis) (* (first lis)
                       (list-mult (rest lis)))))))
 
-
+(: list-fold (%b (%a %b -> %b) (list-of % a) -> %b))
+(check-expect (list-fold 0 + (list 1 2 3)) 6)
 (define list-fold
   (lambda (e op lis)
     (cond
-      ((empty? lis) e)                           ; neutrale Element (initiales Element)
+      ((empty? lis) e)                           ; initiales Element
       ((cons? lis) (op (first lis)
                        (list-fold e op (rest lis)))))))
 
 
-; Liste aufaddieren, benutze "list-fold"
+; Liste aufmultiplizieren, benutze "list-fold"
+(check-expect (list-mult-2 (list 1 2 3)) (list-mult (list 1 2 3)))
 (define list-mult-2
+  (lambda (lis)
+    (list-fold 1 * lis)))
+
+;; list-sum-2
+(check-expect (list-sum-2 (list 1 2 3)) 6)
+(define list-sum-2
+  (lambda (lis)
+    (list-fold 0 + lis)))
+
+
+
+;; Implentiere list-map mit list-fold
+(: list-map-2 ((%a -> %b) (list-of %a) -> (list-of %b)))
+(check-expect (list-map-2 inc (list 1 2 3)) (list 2 3 4))
+(define list-map-2
+  (lambda (...)
+    (list-fold ... ... ...)))
+
+
+
 
 
 
