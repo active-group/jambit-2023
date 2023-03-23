@@ -203,11 +203,15 @@ interface IRunOverAble {
   (lambda (x) (- x 1)))
 
 
+(define lis2 (list 15 7))
+(define lis4 (list 3 4 5 6))
+
+
 ;; Alle Elemente einer Liste aufsummieren
 (: list-sum ((list-of integer) -> integer))
 (check-expect (list-sum lis4) 18)
 (check-expect (list-sum lis2) 22)
-(check-expect (list-sum (empty)) 0)
+(check-expect (list-sum empty) 0)
 (define list-sum
   (lambda (lis)
     (cond
@@ -216,9 +220,24 @@ interface IRunOverAble {
                       (list-sum (rest lis)))))))
 
 
+(define list-mult
+  (lambda (lis)
+    (cond
+      ((empty? lis) 1)                           ; neutrale Element der Multiplikation
+      ((cons? lis) (* (first lis)
+                      (list-mult (rest lis)))))))
 
 
+(define list-fold
+  (lambda (e op lis)
+    (cond
+      ((empty? lis) e)                           ; neutrale Element (initiales Element)
+      ((cons? lis) (op (first lis)
+                       (list-fold e op (rest lis)))))))
 
+
+; Liste aufaddieren, benutze "list-fold"
+(define list-mult-2
 
 
 
