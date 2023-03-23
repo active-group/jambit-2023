@@ -227,7 +227,7 @@ interface IRunOverAble {
       ((cons? lis) (* (first lis)
                       (list-mult (rest lis)))))))
 
-(: list-fold (%b (%a %b -> %b) (list-of % a) -> %b))
+(: list-fold (%b (%a %b -> %b) (list-of %a) -> %b))
 (check-expect (list-fold 0 + (list 1 2 3)) 6)
 (define list-fold
   (lambda (e op lis)
@@ -249,18 +249,32 @@ interface IRunOverAble {
   (lambda (lis)
     (list-fold 0 + lis)))
 
+(define make-greet
+  (lambda (gruß)
+    (lambda (name)
+      (string-append gruß name))))
+
+(define sag-hallo (make-greet "Hallo "))
+
 
 
 ;; Implentiere list-map mit list-fold
 (: list-map-2 ((%a -> %b) (list-of %a) -> (list-of %b)))
 (check-expect (list-map-2 inc (list 1 2 3)) (list 2 3 4))
 (define list-map-2
-  (lambda (lis)
+  (lambda (f lis)
     (list-fold empty
-               ...
+               (lambda (x result)
+                 (cons (f x)
+                       result))
                lis)))
 
-
+;; Implementiere list-filter mit list-fold
+(: list-filter-2 ((%a -> boolean) (list-of %a) -> (list-of %a)))
+(check-expect (list-filter-2 even? (list 1 2 3 4)) (list 2 4))
+(define list-filter-2
+  (lambda (...)
+    (list-fold ... ... ...)))
 
 
 
