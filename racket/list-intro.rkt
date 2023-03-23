@@ -5,8 +5,9 @@
 ; - nicht-leere Liste
 ; -> gemischte Daten
 
-(define list-of-integers
-  (signature (mixed empty-list cons-list)))
+(define list-of
+  (lambda (a)
+    (signature (mixed empty-list (cons-list a)))))
 
 ; Eine leere Liste ist ... nix?
 
@@ -18,19 +19,22 @@
 ; - einer Zahl
 ; - einer Liste mit restlichen Zahlen
 ; --> Selbstbezug
-(define-record cons-list
+(define-record (cons-list a)
   cons
   cons?
-  (first integer)
-  (rest list-of-integers))
+  (first a)
+  (rest (list-of a)))
 
 (define lis1 (cons 3 (empty)))
 (define lis2 (cons 15 (cons 7 (empty))))
 (define lis3 (cons 2 lis2))
 (define lis4 (cons 3 (cons 4 (cons 5 (cons 6 (empty))))))
 
+(define list-of-integers
+  (signature (list-of integer)))
+
 ;; Alle Elemente einer Liste aufsummieren
-(: list-sum (list-of-integers -> integer))
+(: list-sum ((list-of integer) -> integer))
 (check-expect (list-sum lis4) 18)
 (check-expect (list-sum lis2) 22)
 (check-expect (list-sum (empty)) 0)
@@ -80,6 +84,7 @@
                        (cons (first lis) (positives (rest lis)))
                        (positives (rest lis)))))))
 
+(: list-filter ((%a -> boolean) (list-of %a) -> (list-of %a)))
 (define list-filter
   (lambda (predicate lis)
     (cond
@@ -92,4 +97,45 @@
   (lambda (lis)
     (list-filter odd? lis)))
 
-(define odds2 (curry list-filter))
+
+;;; KURZE WIEDERHOLUNG
+
+
+;; Lisp-Syntax, Präfix-Notation
+;; 1. Datenmodellierung:
+;; - zusammengesetzte Daten
+;; - gemischte Daten
+;; - Daten mit Selbstbezug (Rekursion)
+
+;; 2. Funktionen und Funktionen höherer Ordnung:
+;;    Funktionen, die Funktionen als Parameter erhalten, oder Funktionen zurückgeben
+;; 3. Konstruktionsanleitung / systematisches Programmieren
+
+;; Konzepte:
+;; - Immutability
+;; - Komposition
+;; - Funktionen erster Klasse
+;; - kommt noch:
+;;   - erweiterte Datenmodellierung
+;;   - funktionale Software-Architektur
+;;   - (Makros)
+
+;; Ein Auto besteht aus:
+;; - Marke
+;; - Farbe
+;; - PS
+;; -> zusammengesetzte Daten
+(define-record auto
+  make-auto
+  auto?
+  (auto-marke string)
+  (auto-farbe string)
+  (auto-ps natural))
+
+;; Ein Fahrzeug ist eins der Folgenden:
+;; - Ein Auto
+;; - Ein Fahrrad
+;; -> gemischte Daten
+
+#;(define fahrzeug
+  (signature (mixed auto fahrrad)))
