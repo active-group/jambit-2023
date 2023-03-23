@@ -255,8 +255,10 @@ interface IRunOverAble {
 (: list-map-2 ((%a -> %b) (list-of %a) -> (list-of %b)))
 (check-expect (list-map-2 inc (list 1 2 3)) (list 2 3 4))
 (define list-map-2
-  (lambda (...)
-    (list-fold ... ... ...)))
+  (lambda (lis)
+    (list-fold empty
+               ...
+               lis)))
 
 
 
