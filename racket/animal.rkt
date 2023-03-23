@@ -372,8 +372,59 @@ interface IRunOverAble {
   (lambda (f lis)
     (map-2 f lis empty)))
 
-;; list-sum mit Akkumulator implementieren
+;; list-sum-a mit Akkumulator implementieren
+(: list-sum-a ((list-of number) number -> number))
+(check-expect (list-sum-a (list 1 2 3) 0) 6)
+(define list-sum-a
+  (lambda (lis res)
+    (cond
+      ((empty? lis) res)
+      ((cons? lis)
+       (list-sum-a (rest lis) (+ (first lis) res))))))
 
+;;; Liste umdrehen
+; vllt. Hilfsfunktion hilfreich: (add-to-list 5 (list 1 2 3 4)) -> (list 1 2 3 4 5)
+; auch möglich: mit append
+(: rev ((list-of %a) -> (list-of %a)))
+(check-expect (rev (list 1 2 3)) (list 3 2 1))
+(define rev
+  (lambda (lis)
+    (cond
+      ((empty? lis) empty)
+      ((cons? lis)
+       (concat (rev (rest lis))
+               (list (first lis)))))))
+
+;; rev mit Akku
+(: rev-a ((list-of %a) (list-of %a) -> (list-of %a)))
+(check-expect (rev-a (list 1 2 3) empty) (list 3 2 1))
+(define rev-a
+  (lambda (lis acc)
+    (cond
+      ((empty? lis) acc)
+      ((cons? lis)
+       (rev-a (rest lis) (append (list (first lis)) acc))))))
+
+
+(define reverse-2
+  (lambda (lis)
+    (rev-a lis empty)))
+
+
+;;; Rekursion über natürliche Zahlen
+; eine natürliche Zahl ist eins der folgenden
+; - 0
+; - der Nachfolger einer natürlichen Zahl
+
+;; Fakultät einer Zahl n berechnen
+(: factorial (natural -> natural))
+(check-expect (factorial 5) 120)
+(check-expect (factorial 3) 6)
+(define factorial
+  (lambda (n)
+    (cond
+      ((= n 0) 1)
+      ((> n 0) (* n (factorial (dec n)))))))
 
 
 
