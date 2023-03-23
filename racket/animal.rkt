@@ -1,4 +1,4 @@
-#lang deinprogramm/sdp/beginner
+#lang deinprogramm/sdp
 
 ; Ein Gürteltier hat folgende Eigenschaften
 ; - lebendig oder tot
@@ -143,4 +143,15 @@ interface IRunOverAble {
     (define nenner2 (bruch-nenner bruch2))
     (make-bruch (* zähler1 zähler2)
                 (* nenner1 nenner2))))
+
+
+;;; Liste von dillos
+(define dlist (list dillo1 dillo2))
+;;; Liste von Papageien
+(define plist (list parrot1 parrot2))
+; Liste von Tieren
+(define alist (list dillo1 parrot1 dillo2 parrot2))
+
+
+
 
