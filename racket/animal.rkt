@@ -299,7 +299,45 @@ interface IRunOverAble {
                (list-map dillo-weight dillos))))
 
 
-;; MapReduce-Algorithmus
+;; ... MapReduce-Algorithmus von Google / Hadoop...
+;; -----
+
+;;; ÜBUNG Zwei Listen aneinander hängen (ohne append)
+(: concat ((list-of %a) (list-of %a) -> (list-of %a)))
+(check-expect (concat (list 1 2 3) (list 4 5 6)) (list 1 2 3 4 5 6))
+(define concat
+  (lambda (lis1 lis2)
+    (list-fold lis2
+               (lambda (x result)
+                 (cons x result))
+               lis1)))
+#;(define concat
+  (lambda (lis1 lis2)
+    (cond
+      ((empty? lis1) lis2)
+      ((cons? lis1) (cons (first lis1)
+                          (concat (rest lis1) lis2))))))
+
+;; Interleave zweier Listen
+(: interleave ((list-of %a) (list-of %a) -> (list-of %a)))
+(check-expect (interleave (list 1 2 3) (list 100 99 98)) (list 1 100 2 99 3 98))
+(check-expect (interleave (list 1 2 3 4 5) (list 9 9)) (list 1 9 2 9 3 4 5))
+(check-expect (interleave (list 1 2) (list 9 9 9 9)) (list 1 9 2 9 9 9))
+#;(define interleave
+  (lambda (lis1 lis2)
+    (cond
+      ((empty? lis1) lis2)
+      ((empty? lis2) lis1)
+      (else
+       (concat
+        (list (first lis1)
+              (first lis2))
+        (interleave (rest lis1) (rest lis2)))))))
+
+
+
+
+
 
 
 
