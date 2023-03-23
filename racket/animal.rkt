@@ -273,10 +273,33 @@ interface IRunOverAble {
 (: list-filter-2 ((%a -> boolean) (list-of %a) -> (list-of %a)))
 (check-expect (list-filter-2 even? (list 1 2 3 4)) (list 2 4))
 (define list-filter-2
-  (lambda (...)
-    (list-fold ... ... ...)))
+  (lambda (p lis)
+    (list-fold empty
+               (lambda (x result)
+                 (if (p x)
+                     (cons x result)
+                     result))
+               lis)))
+
+;;; Schreibe eine Funktion, die die Gewichte von Dillos aufaddiert
+(: sum-dillo-weights ((list-of dillo) -> natural))
+(check-expect (sum-dillo-weights (list dillo1 dillo2)) 35000)
+#;(define sum-dillo-weights
+  (lambda (dillos)
+    (list-fold 0
+               (lambda (dillo result)
+                 (+ (dillo-weight dillo)
+                    result))
+               dillos)))
+
+(define sum-dillo-weights
+  (lambda (dillos)
+    (list-fold 0
+               +
+               (list-map dillo-weight dillos))))
 
 
+;; MapReduce-Algorithmus
 
 
 
