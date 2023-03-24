@@ -88,8 +88,8 @@ data Animal =
     | MkParrot String Weight
     deriving (Show)
 
---runOverAnimal (MkParrot _ weight) =
---    MkParrot "" weight
+runOverAnimal (MkParrot _ weight) =
+    MkParrot "" weight
 runOverAnimal dillo =
     dillo {dilloLiveness = Dead}
 
