@@ -28,7 +28,7 @@ data Pet =
     Cat 
   | Dog
   | Snake 
-  deriving (Show, Eq)
+  deriving (Show)
 
 -- Gleichheit von Tieren überprüfen
 eqPet :: Pet -> Pet -> Bool
@@ -38,9 +38,10 @@ eqPet :: Pet -> Pet -> Bool
 --                  Cat -> True
 --                  _   -> False
 eqPet Cat Cat = True
-eqPet Dog Dog = True
+eqPet Dog Dog = False
 eqPet Snake Snake = True
 eqPet _ _ = False
 
-
+instance Eq Pet where
+    (==)= eqPet
 
