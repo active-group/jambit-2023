@@ -86,6 +86,7 @@ data Animal =
       MkDillo {dilloWeight :: Weight,
                dilloLiveness :: Liveness}
     | MkParrot String Weight
+    deriving (Show)
 
 --runOverAnimal (MkParrot _ weight) =
 --    MkParrot "" weight
