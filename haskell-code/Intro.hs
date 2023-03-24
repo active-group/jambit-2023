@@ -174,6 +174,6 @@ listProgram2 = [(x,y) | x <- [1,2,3,4], y <- [5,6], x+y < 8]
 
 output :: IO String
 output = do
-    putStrLn "Hallo"
+    putStrLn (show (fromResult (safeDiv 3 4)))
     y <- getLine 
     return y
