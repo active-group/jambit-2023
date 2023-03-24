@@ -1,4 +1,5 @@
 module Intro where
+import Control.Exception (Deadlock)
 
 x :: Integer
 x = 3
@@ -47,10 +48,17 @@ instance Eq Pet where
     (==) = eqPet
 
 
+data Liveness = Alive | Dead
+    deriving (Show)
+
+data Weight = MkWeight Integer 
+
 -- Ein Dillo besteht aus:
 -- - Gewicht
 -- - lebendig oder tot
-
-data Dillo = MkDillo {dilloWeight :: Integer,
-                      dilloAlive :: Bool}
+data Dillo = MkDillo {dilloWeight :: Weight,
+                      dilloLiveness :: Liveness}
     deriving (Show)
+
+dillo1 = MkDillo (MkWeight 20000) Alive
+dillo2 = MkDillo (MkWeight 15000) Dead
