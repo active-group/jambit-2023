@@ -134,7 +134,15 @@ optionalMap f Null = Null
 optionalMap f (Result x) = Result (f x)
 
 instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
     fmap = optionalMap
 
+instance Applicative Optional where
+    -- pure  :: a -> Optional a
+    -- (<*>) :: Optional (a -> b) -> Optional a -> Optional b
+    pure = Result
+    Result f <*> Result x = Result (f x)
+    _ <*> _ = Null
+    
 
 
