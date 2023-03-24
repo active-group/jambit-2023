@@ -132,3 +132,9 @@ add5 x = x + 5
 optionalMap :: (a -> b) -> Optional a -> Optional b
 optionalMap f Null = Null
 optionalMap f (Result x) = Result (f x)
+
+instance Functor Optional where
+    fmap = optionalMap
+
+
+
