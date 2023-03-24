@@ -32,13 +32,15 @@ data Pet =
 
 -- Gleichheit von Tieren überprüfen
 eqPet :: Pet -> Pet -> Bool
-eqPet animal1 animal2 = 
-    case animal1 of
-        Cat -> case animal2 of
-                 Cat -> True
-                 _   -> False
-
-
+-- eqPet animal1 animal2 = 
+--     case animal1 of
+--         Cat -> case animal2 of
+--                  Cat -> True
+--                  _   -> False
+eqPet Cat Cat = True
+eqPet Dog Dog = True
+eqPet Snake Snake = True
+eqPet _ _ = False
 
 
 
