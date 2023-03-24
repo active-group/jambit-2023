@@ -9,3 +9,5 @@ y = 3 / 2 + 5
 f :: Integer -> Integer
 -- f = (\x -> x + 5)
 f x = x + 5
+
+twiceF = f . f
