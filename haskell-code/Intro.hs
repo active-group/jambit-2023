@@ -24,8 +24,18 @@ h x y = x + y
 -- - Schlange
 -- -> neuer Typ
 
-data Pet = Cat | Dog | Snake
-    deriving (Show)
+data Pet = 
+    Cat 
+  | Dog
+  | Snake 
+  deriving (Show)
+
+eqPet :: Pet -> Pet -> Bool
+eqPet Cat Cat = True
+eqPet Dog Dog = True
+eqPet Snake Snake = True
+eqPet _ _ = False
+
 
 
 
