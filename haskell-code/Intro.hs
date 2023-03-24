@@ -53,3 +53,4 @@ instance Eq Pet where
 
 data Dillo = MkDillo {dilloWeight :: Integer,
                       dilloAlive :: Bool}
+    deriving (Show)
