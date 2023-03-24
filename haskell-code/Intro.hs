@@ -69,5 +69,8 @@ toBool Alive = True
 toBool Dead = False
 -}
 
-
+-- runOverDillo
+runOverDillo :: Dillo -> Dillo
+runOverDillo dillo =
+    MkDillo (dilloWeight dillo) Dead
 
