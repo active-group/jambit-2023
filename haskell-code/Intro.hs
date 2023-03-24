@@ -127,6 +127,7 @@ fromResult (Result x) = x
 
 -- map :: (a -> b) -> [a] -> [b]
 
+add5 :: Num a => a -> a
 add5 x = x + 5
 
 optionalMap :: (a -> b) -> Optional a -> Optional b
