@@ -46,3 +46,10 @@ eqPet _ _ = False
 instance Eq Pet where
     (==) = eqPet
 
+
+-- Ein Dillo besteht aus:
+-- - Gewicht
+-- - lebendig oder tot
+
+data Dillo = MkDillo {dilloWeight :: Integer,
+                      dilloAlive :: Bool}
