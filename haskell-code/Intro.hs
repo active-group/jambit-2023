@@ -71,6 +71,7 @@ toBool Dead = False
 
 -- runOverDillo
 runOverDillo :: Dillo -> Dillo
-runOverDillo dillo =
-    MkDillo (dilloWeight dillo) Dead
-
+-- runOverDillo dillo =
+--     MkDillo (dilloWeight dillo) Dead
+runOverDillo (MkDillo weight _) =
+    MkDillo weight Dead
