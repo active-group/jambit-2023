@@ -123,3 +123,7 @@ safeDiv zahl1 zahl2 =
 
 fromResult :: Optional a -> a
 fromResult (Result x) = x
+
+-- map :: (a -> b) -> [a] -> [b]
+
+add5 x = x + 5
