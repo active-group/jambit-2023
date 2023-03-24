@@ -93,4 +93,4 @@ p1'' =
         y <- get "Kaan"
         return (show (x+y))
 
-runDB 
+ 
