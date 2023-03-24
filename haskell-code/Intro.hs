@@ -1,5 +1,6 @@
 module Intro where
 import Control.Exception (Deadlock)
+import Text.XHtml (base)
 
 x :: Integer
 x = 3
@@ -127,3 +128,7 @@ fromResult (Result x) = x
 -- map :: (a -> b) -> [a] -> [b]
 
 add5 x = x + 5
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f Null = Null
+optionalMap f (Result x) = Result (f x)
