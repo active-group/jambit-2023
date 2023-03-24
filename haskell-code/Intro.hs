@@ -145,5 +145,9 @@ instance Applicative Optional where
     Result f <*> Result x = Result (f x)
     _ <*> _ = Null
     
-
-
+instance Monad Optional where
+    -- return :: a -> Optional a
+    -- (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+    return = pure 
+    (Result x) >>= f = f x
+    _ >>= _       = Null
