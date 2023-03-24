@@ -52,6 +52,7 @@ data Liveness = Alive | Dead
     deriving (Show)
 
 data Weight = MkWeight Integer 
+  deriving(Show)
 
 -- Ein Dillo besteht aus:
 -- - Gewicht
