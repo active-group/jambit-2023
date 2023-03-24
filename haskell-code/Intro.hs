@@ -51,14 +51,14 @@ data Liveness = Alive | Dead
     deriving (Show,Eq)
 
 type Weight = Integer
-
+{-
 -- Ein Dillo besteht aus:
 -- - Gewicht
 -- - lebendig oder tot
 data Dillo = MkDillo {dilloWeight :: Weight,
                       dilloLiveness :: Liveness}
     deriving (Show,Eq)
-
+-}
 
 dillo1 = MkDillo 20000 Alive
 dillo2 = MkDillo 15000 Dead
@@ -68,14 +68,24 @@ toBool :: Liveness -> Bool
 toBool Alive = True
 toBool Dead = False
 -}
-
+{-
 -- runOverDillo
 runOverDillo :: Dillo -> Dillo
 -- runOverDillo dillo =
 --     MkDillo (dilloWeight dillo) Dead
 --runOverDillo (MkDillo weight _) =
 --    MkDillo weight Dead
-runOverDillo dillo@(MkDillo w l) =
-    if dilloLiveness dillo == Dead
-    then dillo
-    else MkDillo w Dead
+-- runOverDillo dillo@(MkDillo w l) =
+--     if dilloLiveness dillo == Dead
+--     then dillo
+--     else MkDillo w Dead
+runOverDillo (MkDillo weight _) =
+    MkDillo weight Dead
+-}
+data Animal =
+      MkDillo {dilloWeight :: Weight,
+               dilloLiveness :: Liveness}
+    | MkParrot String Weight
+
+runOverAnimal (MkParrot _ weight) =
+    MkParrot "" weight
