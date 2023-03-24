@@ -107,3 +107,6 @@ strikeMultiples n list =
 
 sieve [] = []
 sieve (x:xs) = x : sieve (strikeMultiples x xs)
+
+divide x y =
+    x / y
