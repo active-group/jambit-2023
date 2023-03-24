@@ -170,4 +170,4 @@ listProgram = do
     z <- [2,3]
     return (x,y,z)  
 
-listProgram2 = [(x,y) | x <- [1,2,3,4], y <- [5,6], x+y < 6]
+listProgram2 = [(x,y) | x <- [1,2,3,4], y <- [5,6], x+y < 8]
