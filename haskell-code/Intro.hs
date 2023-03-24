@@ -47,11 +47,10 @@ eqPet _ _ = False
 instance Eq Pet where
     (==) = eqPet
 
-
 data Liveness = Alive | Dead
     deriving (Show)
 
-data Weight = MkWeight Integer 
+newtype Weight = MkWeight Integer 
   deriving(Show)
 
 -- Ein Dillo besteht aus:
@@ -61,5 +60,15 @@ data Dillo = MkDillo {dilloWeight :: Weight,
                       dilloLiveness :: Liveness}
     deriving (Show)
 
+
 dillo1 = MkDillo (MkWeight 20000) Alive
 dillo2 = MkDillo (MkWeight 15000) Dead
+
+{-
+toBool :: Liveness -> Bool
+toBool Alive = True
+toBool Dead = False
+-}
+
+
+
