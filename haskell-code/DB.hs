@@ -1,5 +1,8 @@
 module DB where
 
+import qualified Data.Map as Map
+import Data.Map (Map, (!))
+
 {- 
 DB: Key-Value-Store: String -> Integer
 
@@ -59,6 +62,8 @@ p1' = put "Kaan" 35 `splice` (\() ->
       get "Kaan" `splice` (\y -> 
       Return (show (x+y))))))
 
+
+
 littleProgram :: DB ()
 littleProgram = get "Kaan" `splice` (\x ->
                 put "Tom" x)
@@ -80,3 +85,12 @@ instance Applicative DB where
 instance Monad DB where
     (>>=) = splice
 
+p1'' = 
+    do
+        smallProgram2
+        x <- get "Kaan"
+        put "Kaan" (x+1)
+        y <- get "Kaan"
+        return (show (x+y))
+
+runDB 
