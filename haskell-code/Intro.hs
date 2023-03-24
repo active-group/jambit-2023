@@ -94,7 +94,9 @@ runOverAnimal dillo =
     dillo {dilloLiveness = Dead}
 
 listSum :: [Integer] -> Integer
-listSum xs = 
-    if [] == xs
-    then 0
-    else head xs + listSum (tail xs)
+listSum [] = 0
+listSum (x:xs) = x + listSum xs
+
+-- LAZY EVALUATION
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n+1)
