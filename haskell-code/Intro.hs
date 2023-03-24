@@ -108,5 +108,18 @@ strikeMultiples n list =
 sieve [] = []
 sieve (x:xs) = x : sieve (strikeMultiples x xs)
 
+
 divide x y =
     x / y
+
+data Optional a = Result a | Null
+    deriving (Show, Eq)
+
+safeDiv :: (Eq a, Fractional a) => a -> a -> Optional a
+safeDiv zahl1 zahl2 =
+    if zahl2 == 0
+    then Null
+    else Result (zahl1 / zahl2)
+
+fromResult :: Optional a -> a
+fromResult (Result x) = x
