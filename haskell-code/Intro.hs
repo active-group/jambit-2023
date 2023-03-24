@@ -177,3 +177,11 @@ output = do
     putStrLn (show (fromResult (safeDiv 3 4)))
     y <- getLine 
     return y
+
+-- interessante weitere Typklassen:
+-- - Semigroup (Halbgruppe)
+--   - Menge M,
+--   - hat Verknüpfung (+), die assoziativ ist
+-- - Monoid
+--   - hat Verknüpfung (+), die assoziativ ist
+--   - hat neutrales Element
