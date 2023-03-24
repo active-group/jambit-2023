@@ -89,3 +89,7 @@ data Animal =
 
 runOverAnimal (MkParrot _ weight) =
     MkParrot "" weight
+runOverAnimal dillo =
+    dillo {dilloLiveness = Dead}
+
+    
