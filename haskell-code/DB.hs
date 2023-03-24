@@ -53,3 +53,30 @@ splice (Get key callback) next     =
 splice (Put key val callback) next =
     Put key val (\() -> splice (callback ()) next)
 
+p1' = put "Kaan" 35 `splice` (\() ->
+      get "Kaan" `splice` (\x -> 
+      put "Kaan" (x+1) `splice` (\() -> 
+      get "Kaan" `splice` (\y -> 
+      Return (show (x+y))))))
+
+littleProgram :: DB ()
+littleProgram = get "Kaan" `splice` (\x ->
+                put "Tom" x)
+
+instance Functor DB where
+    -- fmap :: (a -> b) -> DB a -> DB b
+    fmap f (Return res) = Return (f res)
+    fmap f (Get key callback) =
+        Get key (\x -> fmap f (callback x))
+    fmap f (Put key val callback) =
+        Put key val (\() -> fmap f (callback ()))
+
+
+instance Applicative DB where
+    pure = Return
+    (<*>) ff fa = ff >>= (\ f -> fmap f fa)
+
+
+instance Monad DB where
+    (>>=) = splice
+
