@@ -123,3 +123,4 @@ safeDiv zahl1 zahl2 =
 
 fromResult :: Optional a -> a
 fromResult (Result x) = x
+fromResult Null = undefined
