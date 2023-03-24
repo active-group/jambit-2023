@@ -28,7 +28,7 @@ data Pet =
     Cat 
   | Dog
   | Snake 
-  deriving (Show)
+  deriving (Show, Eq)
 
 -- Gleichheit von Tieren überprüfen
 eqPet :: Pet -> Pet -> Bool
