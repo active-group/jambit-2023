@@ -50,8 +50,7 @@ instance Eq Pet where
 data Liveness = Alive | Dead
     deriving (Show)
 
-newtype Weight = MkWeight Integer 
-  deriving(Show)
+type Weight = Integer
 
 -- Ein Dillo besteht aus:
 -- - Gewicht
@@ -61,8 +60,8 @@ data Dillo = MkDillo {dilloWeight :: Weight,
     deriving (Show)
 
 
-dillo1 = MkDillo (MkWeight 20000) Alive
-dillo2 = MkDillo (MkWeight 15000) Dead
+dillo1 = MkDillo 20000 Alive
+dillo2 = MkDillo 15000 Dead
 
 {-
 toBool :: Liveness -> Bool
