@@ -158,5 +158,11 @@ da a b c d =
     do 
         x <- safeDiv a b
         y <- safeDiv c d
-        return (x + y)
-       
+        let z = x + y
+        return z
+
+
+listProgram = do
+    x <- [1,2 ,3, 4]
+    y <- [5,6, 7]
+    return (x,y) 
