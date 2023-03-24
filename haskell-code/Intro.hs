@@ -100,3 +100,6 @@ listSum (x:xs) = x + listSum xs
 -- LAZY EVALUATION
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
+
+strikeMultiples n list = 
+    filter (\x -> x `mod` n /= 0) list
