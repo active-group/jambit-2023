@@ -93,4 +93,8 @@ runOverAnimal (MkParrot _ weight) =
 runOverAnimal dillo =
     dillo {dilloLiveness = Dead}
 
-    
+listSum :: [Integer] -> Integer
+listSum xs = 
+    if [] == xs
+    then 0
+    else head xs + listSum (tail xs)
