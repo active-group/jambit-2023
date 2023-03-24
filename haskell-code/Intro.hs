@@ -10,6 +10,9 @@ f :: Integer -> Integer
 -- f = (\x -> x + 5)
 f x = x + 5
 
+g :: Integer -> Integer 
 g x = x * 2
 
 twiceF = f . f
+
+h x y = x + y
