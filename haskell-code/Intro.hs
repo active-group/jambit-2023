@@ -48,7 +48,7 @@ instance Eq Pet where
     (==) = eqPet
 
 data Liveness = Alive | Dead
-    deriving (Show)
+    deriving (Show,Eq)
 
 type Weight = Integer
 
@@ -57,7 +57,7 @@ type Weight = Integer
 -- - lebendig oder tot
 data Dillo = MkDillo {dilloWeight :: Weight,
                       dilloLiveness :: Liveness}
-    deriving (Show)
+    deriving (Show,Eq)
 
 
 dillo1 = MkDillo 20000 Alive
@@ -73,5 +73,9 @@ toBool Dead = False
 runOverDillo :: Dillo -> Dillo
 -- runOverDillo dillo =
 --     MkDillo (dilloWeight dillo) Dead
-runOverDillo (MkDillo weight _) =
-    MkDillo weight Dead
+--runOverDillo (MkDillo weight _) =
+--    MkDillo weight Dead
+runOverDillo dillo@(MkDillo w l) =
+    if dilloLiveness dillo == Dead
+    then dillo
+    else MkDillo w Dead
