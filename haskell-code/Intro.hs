@@ -16,3 +16,17 @@ g x = x * 2
 twiceF = f . f
 
 h x y = x + y
+
+
+-- Ein Haustier ist eines der folgenen:
+-- - Hund
+-- - Katze
+-- - Schlange
+-- -> neuer Typ
+
+data Pet = Cat | Dog | Snake
+
+
+
+
+
