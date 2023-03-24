@@ -101,5 +101,9 @@ listSum (x:xs) = x + listSum xs
 natsFrom :: Integer -> [Integer]
 natsFrom n = n : natsFrom (n+1)
 
+strikeMultiples :: Integral a => a -> [a] -> [a]
 strikeMultiples n list = 
     filter (\x -> x `mod` n /= 0) list
+
+sieve [] = []
+sieve (x:xs) = x : sieve (strikeMultiples 2 xs)
