@@ -25,6 +25,7 @@ h x y = x + y
 -- -> neuer Typ
 
 data Pet = Cat | Dog | Snake
+    deriving (Show)
 
 
 
