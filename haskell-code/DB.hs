@@ -93,4 +93,11 @@ p1'' =
         y <- get "Kaan"
         return (show (x+y))
 
- 
+runDB :: Map String Integer -> DB a -> (a, Map String Integer)
+runDB mp (Return res) = (res, mp)
+runDB mp (Get key callback) =
+    let age = mp ! key
+    in runDB mp (callback age)
+runDB mp (Put key val callback) =
+    let mp' = Map.insert key val mp
+    in runDB mp' (callback ())
