@@ -38,10 +38,11 @@ eqPet :: Pet -> Pet -> Bool
 --                  Cat -> True
 --                  _   -> False
 eqPet Cat Cat = True
-eqPet Dog Dog = False
+eqPet Dog Dog = True
 eqPet Snake Snake = True
 eqPet _ _ = False
 
+
 instance Eq Pet where
-    (==)= eqPet
+    (==) = eqPet
 
