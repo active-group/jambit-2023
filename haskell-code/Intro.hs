@@ -158,11 +158,16 @@ da a b c d =
     do 
         x <- safeDiv a b
         y <- safeDiv c d
-        let z = x + y
-        return z
+        return (x+y)
 
+ --   (safeDiv a b) >>= (\x ->
+ --   (safeDiv c d) >>= (\y ->
+ --   return (x + y)))
 
 listProgram = do
     x <- [1,2 ,3, 4]
     y <- [5,6, 7]
-    return (x,y) 
+    z <- [2,3]
+    return (x,y,z)  
+
+listProgram2 = [(x,y) | x <- [1,2,3,4],y <- [5,6]]
