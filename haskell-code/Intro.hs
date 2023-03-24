@@ -151,3 +151,12 @@ instance Monad Optional where
     return = pure 
     (Result x) >>= f = f x
     _ >>= _       = Null
+
+da :: (Eq b, Fractional b) => b -> b -> b -> b -> Optional b
+da a b c d =
+
+    do 
+        x <- safeDiv a b
+        y <- safeDiv c d
+        return (x + y)
+       
