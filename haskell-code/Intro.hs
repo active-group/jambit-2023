@@ -34,8 +34,6 @@ eqPet :: Pet -> Pet -> Bool
 eqPet Cat Cat = True
 eqPet Dog Dog = True
 eqPet Snake Snake = True
-eqPet _ _ = False
-
 
 
 
