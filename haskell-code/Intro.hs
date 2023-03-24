@@ -106,4 +106,4 @@ strikeMultiples n list =
     filter (\x -> x `mod` n /= 0) list
 
 sieve [] = []
-sieve (x:xs) = x : sieve (strikeMultiples 2 xs)
+sieve (x:xs) = x : sieve (strikeMultiples x xs)
