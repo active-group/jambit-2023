@@ -110,5 +110,3 @@ putToSQLite :: String -> Int -> IO ()
 putToSQlite key val = 
     do 
         SQL.insert key val
-
-
