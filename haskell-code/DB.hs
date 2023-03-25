@@ -2,6 +2,8 @@ module DB where
 
 import qualified Data.Map as Map
 import Data.Map (Map, (!))
+import SQLite ()
+import Language.Haskell.TH (valD)
 
 {- 
 DB: Key-Value-Store: String -> Integer
@@ -101,3 +103,12 @@ runDB mp (Get key callback) =
 runDB mp (Put key val callback) =
     let mp' = Map.insert key val mp
     in runDB mp' (callback ())
+
+runDBSQLite :: Connection -> DB a -> IO a
+
+putToSQLite :: String -> Int -> IO ()
+putToSQlite key val = 
+    do 
+        SQL.insert key val
+
+
