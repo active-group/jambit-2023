@@ -2,7 +2,7 @@ module DB where
 
 import qualified Data.Map as Map
 import Data.Map (Map, (!))
-import SQLite ()
+-- import SQLite () <-- nur zur Veranschaulichung
 import Language.Haskell.TH (valD)
 
 {- 
