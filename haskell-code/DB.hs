@@ -2,7 +2,7 @@ module DB where
 
 import qualified Data.Map as Map
 import Data.Map (Map, (!))
--- import SQLite () <-- nur zur Veranschaulichung
+-- import SQLite () <-- nur zur Veranschaulichung   
 import Language.Haskell.TH (valD)
 
 {- 
@@ -104,9 +104,12 @@ runDB mp (Put key val callback) =
     let mp' = Map.insert key val mp
     in runDB mp' (callback ())
 
+{-
+-- nur zur Veranschaulichung 
 runDBSQLite :: Connection -> DB a -> IO a
 
 putToSQLite :: String -> Int -> IO ()
 putToSQlite key val = 
     do 
         SQL.insert key val
+-}
