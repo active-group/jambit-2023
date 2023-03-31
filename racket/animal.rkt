@@ -460,11 +460,38 @@ interface IRunOverAble {
 
 ;; PROPERTY-BASED TESTING
 
+; quicktest -> testet auf Eigenschaften mit zufällig generierten Daten
 
+(check-property
+ (for-all ((a natural)
+           (b natural)
+           (c natural))
+   (= (+ a (+ b c))
+      (+ (+ a b) c))))
 
+;; Teste Operatoren auf Kommutativität: (a + b) = (b + a)
+;; Teste eine Listeneigenschaft!
 
+; Reverse Reverse List = List
+(check-property
+ (for-all ((lis (list-of natural)))
+   (expect lis
+           (reverse (reverse lis)))))
 
+(check-property
+ (for-all ((lis (list-of natural)))
+   (or (empty? lis) 
+       (< (length (rest lis))
+          (length lis)))))
 
+(check-property
+ (for-all ((a natural)
+           (b natural)
+           (c natural))
+   (if (and (> a b)
+            (> b c))
+       (> a c)
+       #t)))
 
 
 
